@@ -100,7 +100,9 @@ class ClassFinderTest {
     void defaultImportClasses() {
         Map<String, Set<String>> r1 = VMPluginFactory.getPlugin().getDefaultImportClasses(ResolveVisitor.DEFAULT_IMPORTS) as TreeMap<String, Set<String>>
 
-        assert (ResolveVisitor.DEFAULT_IMPORTS as List).sort() == r1.values().stream().flatMap(e -> e.stream()).collect(Collectors.toSet()).sort()
+        def defaultImports = new ArrayList(ResolveVisitor.DEFAULT_IMPORTS as List)
+        Collections.sort(defaultImports)
+        assert defaultImports == r1.values().stream().flatMap(e -> e.stream()).collect(Collectors.toSet()).sort()
     }
 
     @Test
